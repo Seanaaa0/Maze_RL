@@ -1,7 +1,8 @@
-numpy==1.24.0 
-matplotlib==3.6.3 
-pygame 
-tqdm==4.64.0 
-scipy==1.9.3 
-seaborn==0.11.2 
-opencv-python==4.5.5.62 
+# Axolotl & LLM fine-tuning
+transformers==4.38.2
+accelerate==0.27.2
+peft==0.10.0
+bitsandbytes==0.42.0
+scipy==1.10.1
+scikit-learn
+einops
