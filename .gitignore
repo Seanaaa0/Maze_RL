@@ -3,3 +3,4 @@ outputs/phi2-CoT-finetune/*.bin
 outputs/phi2-CoT-finetune/*.pt
 outputs/phi2-CoT-finetune/*.safetensors
 outputs/phi2-CoT-finetune/pytorch_model.bin
+"experiments-linux/models/" 
