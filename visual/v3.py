@@ -1,19 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import os
-# === 讀取含陷阱的地圖資料 ===
-folder = "C:/Users/seana/maze/outputs/"
-for f in os.listdir(folder):
-    if f.endswith(".npy") and f.startswith("trap_"):
-        path = os.path.join(folder, f)
-        break
-data = np.load(path, allow_pickle=True).item()
+
+# 讀取 ground truth
+gt_path = "C:/Users/seana/maze/outputs/mem_trap/gt_maze6_multi_103x103_SEED88.npy"
+data = np.load(gt_path, allow_pickle=True).item()
+
 maze = data["wall_map"]
 start = data["start_pos"]
-goal = data["goal_pos"]
+goals = data["goal_list"]
 traps = set(map(tuple, data["trap_list"]))
 
-# === 顯示地圖 ===
+# 繪圖
 H, W = maze.shape
 img = np.zeros((H, W, 3))
 for i in range(H):
@@ -21,16 +18,18 @@ for i in range(H):
         if maze[i, j] == 1:
             img[i, j] = (0.0, 0.0, 0.0)     # 牆
         else:
-            img[i, j] = (1.0, 1.0, 1.0)     # 通道
+            img[i, j] = (1.0, 1.0, 1.0)     # 路
 
 for tx, ty in traps:
-    img[tx, ty] = (1.0, 1.0, 0.0)  # 陷阱（黃色）
+    img[tx, ty] = (1.0, 1.0, 0.0)  # 陷阱：黃
 
-img[start] = (0.0, 1.0, 0.0)   # 起點（綠）
-img[goal] = (1.0, 0.0, 0.0)    # 終點（紅）
+for gx, gy in goals:
+    img[gx, gy] = (1.0, 0.0, 0.0)  # 目標：紅
 
-plt.figure(figsize=(6, 6))
+img[start[0], start[1]] = (0.0, 1.0, 0.0)   # 起點：綠
+
+plt.figure(figsize=(8, 8))
 plt.imshow(img, interpolation='nearest')
-plt.title(f"Maze {H}x{W} with Traps | Seed {data['seed']}")
+plt.title(f"Ground Truth Maze {H}x{W} with Goals & Traps")
 plt.xticks([]), plt.yticks([])
 plt.show()
