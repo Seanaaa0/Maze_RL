@@ -1,6 +1,8 @@
-# LoRA / Axolotl outputs
-outputs/phi2-CoT-finetune/*.bin
-outputs/phi2-CoT-finetune/*.pt
-outputs/phi2-CoT-finetune/*.safetensors
-outputs/phi2-CoT-finetune/pytorch_model.bin
-"experiments-linux/models/" 
+__pycache__/
+*.pyc
+.DS_Store
+*.npy
+*.pt
+*.jsonl
+outputs/
+experiments-linux/
