@@ -1,4 +1,5 @@
-# 🧭 Maze_RL_GPT
+# 🧭 Maze_RL
+
 
 This project explores **Reinforcement Learning (RL)** in a series of **custom maze environments**, progressively increasing in complexity. It integrates GPT data generation and inference logic, but the actual fine-tuning process is now migrated to a new project: [GPT-CoT](https://github.com/Seanaaa0/GPT-CoT)
 
