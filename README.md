@@ -1,4 +1,4 @@
-# 🧭 Maze_RL
+# Maze_RL
 
 
 This project explores **Reinforcement Learning (RL)** in a series of **custom maze environments**, progressively increasing in complexity. It integrates GPT data generation and inference logic, but the actual fine-tuning process is now migrated to a new project: [GPT-CoT](https://github.com/Seanaaa0/GPT-CoT)
@@ -6,7 +6,7 @@ This project explores **Reinforcement Learning (RL)** in a series of **custom ma
 
 ---
 
-## 📦 Environment Overview
+## Environment Overview
 
 All environments are custom-built in Python and partially follow the `gymnasium` interface.
 
@@ -26,7 +26,7 @@ All environments support:
 
 ---
 
-## 🎮 Key Modules
+## Key Modules
 
 - `env/` & `env_partial/`: Maze environments (fully or partially observable)
 - `train/`: RL-inspired exploration or trajectory logging
@@ -36,16 +36,16 @@ All environments support:
 
 ---
 
-## 🤖 GPT Integration
+## GPT Integration
 
 The Maze environments are used to generate reasoning datasets for GPT fine-tuning.
 
-➡️ **All model fine-tuning tasks are now maintained under a new repo:**  
-🔗 [GPT-CoT (Chain-of-Thought Reasoning Fine-Tuning)](https://github.com/Seanaaa0/GPT-CoT)
+ **All model fine-tuning tasks are now maintained under a new repo:**  
+ [GPT-CoT (Chain-of-Thought Reasoning Fine-Tuning)](https://github.com/Seanaaa0/GPT-CoT)
 
 ---
 
-## 📊 Example Outputs
+## Example Outputs
 
 - ✅ Visualization of `run_tsp_theta_6.py`: Shows shortest goal path with TSP search
 - ✅ Trap avoidance coloring in maze5
@@ -53,11 +53,11 @@ The Maze environments are used to generate reasoning datasets for GPT fine-tunin
 
 ---
 
-## 📁 Demo Materials
+## Demo Materials
 
-📄 `maze.pdf`: Slide summary of motivation, environment, training logic, and output examples  
-🎬 `run_demo.mp4`: Real-time TSP navigation video  
-📊 `v3.py`: Visualize `gt_maze6_multi_SEED*.npy` ground truth maps
+ `maze.pdf`: Slide summary of motivation, environment, training logic, and output examples  
+ `run_demo.mp4`: Real-time TSP navigation video  
+ `v3.py`: Visualize `gt_maze6_multi_SEED*.npy` ground truth maps
 
 ---
 
