@@ -90,5 +90,5 @@ git filter-repo --force --path outputs --path experiments-linux --invert-paths
 
 ## 🔗 GitHub
 
-This project is hosted at: [Maze_RL_GPT](https://github.com/Seanaaa0/Maze_RL_GPT)  
+This project is hosted at: [Maze_RL_GPT](https://github.com/Seanaaa0/Maze_RL)  
 GPT model training: [GPT-CoT](https://github.com/Seanaaa0/GPT-CoT)
