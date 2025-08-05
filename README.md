@@ -2,7 +2,8 @@
 
 
 This project explores **Reinforcement Learning (RL)** in a series of **custom maze environments**, progressively increasing in complexity. It integrates GPT data generation and inference logic, but the actual fine-tuning process is now migrated to a new project: [GPT-CoT](https://github.com/Seanaaa0/GPT-CoT)
-🎬 [Watch the demo video on YouTube](https://youtu.be/l3tni0Ts-eE)
+🎬 [Watch the demo 1 video on YouTube](https://youtu.be/l3tni0Ts-eE)
+🎬 [Watch the demo 2 video on YouTube](https://youtu.be/l3tni0Ts-eE)
 
 ---
 
@@ -90,5 +91,5 @@ git filter-repo --force --path outputs --path experiments-linux --invert-paths
 
 ## 🔗 GitHub
 
-This project is hosted at: [Maze_RL_GPT](https://github.com/Seanaaa0/Maze_RL)  
+This project is hosted at: [Maze_RL](https://github.com/Seanaaa0/Maze_RL)  
 GPT model training: [GPT-CoT](https://github.com/Seanaaa0/GPT-CoT)
