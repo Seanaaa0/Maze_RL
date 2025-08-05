@@ -1,8 +1,9 @@
-# Axolotl & LLM fine-tuning
-transformers==4.38.2
-accelerate==0.27.2
-peft==0.10.0
-bitsandbytes==0.42.0
-scipy==1.10.1
-scikit-learn
-einops
+numpy>=1.23.0
+opencv-python
+matplotlib
+tqdm
+torch>=2.0.0
+pygame
+scipy  # 若有使用 Dijkstra / distance
+networkx  # 若 TSP 模擬用圖形結構
+scikit-learn 
