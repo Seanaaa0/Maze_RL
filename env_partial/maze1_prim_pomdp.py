@@ -12,8 +12,8 @@ class Maze1PrimPOMDPEnv(gym.Env):
 
     def __init__(self, render_mode=None):
         super().__init__()
-        self.rows = 25
-        self.cols = 25
+        self.rows = 103
+        self.cols = 103
         self.render_mode = render_mode
 
         self.actions = ['n', 'e', 's', 'w']

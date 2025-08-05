@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # 讀取 ground truth
-gt_path = "C:/Users/seana/maze/outputs/mem_trap/gt_maze6_multi_103x103_SEED88.npy"
+gt_path = "C:/Users/seana/maze/outputs/mem_trap/gt_maze6_multi_101x101_SEED123.npy"
 data = np.load(gt_path, allow_pickle=True).item()
 
 maze = data["wall_map"]

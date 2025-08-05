@@ -16,7 +16,7 @@ MOVE = {
 class Maze6MultiGoalEnv(gym.Env):
     metadata = {"render_modes": ["human"], "render_fps": 5}
 
-    def __init__(self, render_mode=None, size=55, num_goals=3):
+    def __init__(self, render_mode=None, size=103, num_goals=3):
         self.size = size
         self.num_goals = num_goals
         self.grid = np.ones((self.size, self.size), dtype=np.int32)

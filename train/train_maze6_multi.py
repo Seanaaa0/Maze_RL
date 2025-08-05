@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 import numpy as np
@@ -10,10 +11,17 @@ spec = importlib.util.spec_from_file_location("maze6_multi_goal", env_path)
 maze6 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(maze6)
 
-SIZE = 55
-SEED = 178418
-MAX_STEPS = 4000
-REQUIRED_SUCCESS = 3
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--size', type=int, default=25)
+parser.add_argument('--seed', type=int, default=42)
+parser.add_argument('--max_steps', type=int, default=1000)
+args = parser.parse_args()
+
+SIZE = args.size
+SEED = args.seed
+MAX_STEPS = args.max_steps
+REQUIRED_SUCCESS = 2
 
 
 def make_env():

@@ -84,58 +84,114 @@ for a, b in itertools.permutations(all_points, 2):
     if path:
         paths[(a, b)] = path
 
-# === 嘗試所有 goal 排列，選擇避開陷阱的最短組合 ===
+# === Nearest Neighbor + 2-opt (for >7 goals) ===
+
+
+def nearest_neighbor_2opt(start, goals, paths):
+    unvisited = goals[:]
+    current = start
+    route = [start]
+    while unvisited:
+        nearest = min(unvisited, key=lambda g: len(
+            paths.get((current, g), [])) or 1e9)
+        if (current, nearest) not in paths:
+            return None
+        route.append(nearest)
+        current = nearest
+        unvisited.remove(nearest)
+
+    # 2-opt 優化
+    improved = True
+    while improved:
+        improved = False
+        for i in range(1, len(route) - 2):
+            for j in range(i + 1, len(route) - 1):
+                if (route[i - 1], route[j]) in paths and (route[i], route[j + 1]) in paths:
+                    new_len = len(paths[(route[i - 1], route[j])]) + \
+                        len(paths[(route[i], route[j + 1])])
+                    old_len = len(paths[(route[i - 1], route[i])]) + \
+                        len(paths[(route[j], route[j + 1])])
+                    if new_len < old_len:
+                        route[i:j + 1] = reversed(route[i:j + 1])
+                        improved = True
+
+    # 拼接路徑
+    full_path = []
+    for i in range(len(route) - 1):
+        seg = paths.get((route[i], route[i + 1]), [])
+        if not seg:
+            return None
+        if i > 0:
+            seg = seg[1:]
+        full_path.extend(seg)
+    return full_path
+
+
+# === 根據目標數量選擇演算法 ===
 best_path = None
 min_length = float("inf")
-for perm in itertools.permutations(goals):
-    full = []
-    current = start
-    valid = True
-    for g in perm:
-        key = (current, g)
-        if key not in paths:
-            valid = False
-            break
-        segment = paths[key]
-        if full:
-            segment = segment[1:]
-        full.extend(segment)
-        current = g
-    if valid and len(full) < min_length:
-        min_length = len(full)
-        best_path = full
+method = ""
 
-print("\U0001F9ED 最短合法路徑長度（避開陷阱）：", min_length)
+if len(goals) <= 7:
+    for perm in itertools.permutations(goals):
+        full = []
+        current = start
+        valid = True
+        for g in perm:
+            key = (current, g)
+            if key not in paths:
+                valid = False
+                break
+            segment = paths[key]
+            if full:
+                segment = segment[1:]
+            full.extend(segment)
+            current = g
+        if valid and len(full) < min_length:
+            min_length = len(full)
+            best_path = full
+            method = "Exhaustive Permutations"
+else:
+    best_path = nearest_neighbor_2opt(start, goals, paths)
+    if best_path:
+        min_length = len(best_path)
+        method = "Nearest Neighbor + 2-opt Approximation"
+
+print("🧠 TSP 方法:", method)
+print("🧭 最短合法路徑長度（避開陷阱）：", min_length)
 
 # === 顯示動畫 ===
-COLOR_WALL = (0.0, 0.0, 0.0)
-COLOR_PATH = (0.2, 0.4, 0.9)
-COLOR_AGENT = (0.0, 1.0, 0.4)
-COLOR_GOAL = (1.0, 0.6, 0.2)
-COLOR_TRAP = (1.0, 1.0, 0.0)
+if best_path:
+    COLOR_WALL = (0.0, 0.0, 0.0)
+    COLOR_PATH = (0.2, 0.4, 0.9)
+    COLOR_AGENT = (0.0, 1.0, 0.4)
+    COLOR_GOAL = (1.0, 0.6, 0.2)
+    COLOR_TRAP = (1.0, 1.0, 0.0)
 
-plt.ion()
-fig, ax = plt.subplots(figsize=(8, 8))
+    plt.ion()
+    fig, ax = plt.subplots(figsize=(8, 8))
 
-for step, (x, y) in enumerate(best_path):
-    img = np.ones((H, W, 3)) * 0.8
-    for i in range(H):
-        for j in range(W):
-            if combined[i, j]:
-                img[i, j] = COLOR_WALL
-    for tx, ty in trap_set:
-        img[tx, ty] = COLOR_TRAP
-    for gx, gy in goals:
-        img[gx, gy] = COLOR_GOAL
-    for px, py in best_path[:step]:
-        img[px, py] = COLOR_PATH
-    img[x, y] = COLOR_AGENT
+    for step, (x, y) in enumerate(best_path):
+        img = np.ones((H, W, 3)) * 0.8
+        for i in range(H):
+            for j in range(W):
+                if combined[i, j]:
+                    img[i, j] = COLOR_WALL
+        for tx, ty in trap_set:
+            img[tx, ty] = COLOR_TRAP
+        for gx, gy in goals:
+            img[gx, gy] = COLOR_GOAL
+        for px, py in best_path[:step]:
+            img[px, py] = COLOR_PATH
+        img[x, y] = COLOR_AGENT
 
-    ax.clear()
-    ax.imshow(img, interpolation='nearest')
-    ax.set_title(f"TSP Theta* (No Trap) | Step {step+1}/{len(best_path)}")
-    ax.set_xticks([]), ax.set_yticks([])
-    plt.pause(0.1)
+        ax.clear()
+        ax.imshow(img, interpolation='nearest')
+        ax.set_title(f"TSP: {method} | Step {step+1}/{len(best_path)}")
+        ax.set_xticks([]), ax.set_yticks([])
+        plt.pause(0.1)
 
-plt.ioff()
-plt.show()
+    plt.ioff()
+    plt.show()
+else:
+    print("❌ 找不到可行路徑")

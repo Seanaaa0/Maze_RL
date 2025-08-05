@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # 👉 請把這裡換成你的檔案路徑
-path = "C:/Users/seana/maze/outputs/non_size15_seed1496.npy"
+path = "C:/Users/seana/maze/outputs/prim_pomdp_20250805_191511.npy"
 
 # 讀取迷宮
 maze = np.load(path)
